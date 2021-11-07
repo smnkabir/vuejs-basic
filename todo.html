@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<body>
+
+<h2>Todo App</h2>
+
+<div id="app">
+  <input v-model="newItem">
+  <button v-on:click = "addNew">Add new todo</button>
+  <ol>
+    <li v-for="x in todos">
+      {{ x.aa }}
+      <span v-on:click = "cancel(x.aa)" style="cursor: pointer;" > X </span>
+    </li>
+  </ol>
+  <!-- <span v-if = "show">showing</span>
+  <p v-bind:title = "date" v-for = "t in todos" >{{t.aa}}</p> -->
+</div>
+
+<script>
+myObject = new Vue({
+  el: '#app',
+  data: {
+    newItem : "demo",
+    todos: [
+      { aa: 'Learn JavaScript' },
+      { aa: 'Learn Vue.js' },
+      { aa: 'Build Something Awesome' },
+      { aa: 'hello Nk' }
+    ],
+    date: "Date:" + new Date().toLocaleString(),
+    show : true
+  },
+  methods: {
+    cancel: function (item){
+      console.log(item);
+      for(var i = 0; i < this.todos.length ; i++)
+      {
+        if(this.todos[i].aa.localeCompare(item) == 0 ){
+          this.todos.splice(i,1);
+        }
+      }
+    },
+    addNew: function (){
+      console.log(this.newItem);
+      if(this.newItem.localeCompare("") != 0)
+        this.todos.push({aa: this.newItem});
+      this.newItem = "";
+    }
+  }
+})
+</script>
+
+</body>
+</html>
